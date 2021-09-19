@@ -1,4 +1,7 @@
-export type Competition = [Date, string, string];
+export interface Competition {
+    date: Date;
+    minerals: [string, string];
+}
 
 // voting at 23:00 GMT (approx)
 function d(monthDay: string): Date {
@@ -6,16 +9,30 @@ function d(monthDay: string): Date {
 }
 
 const competitions: Competition[] = [
-    [d('09-12'), 'Chalcanthite', 'Torbernite'],
-    [d('09-13'), 'Saponite', 'Zircon'],
-    [d('09-14'), 'Palygorskite', 'Kaolinite'],
-    [d('09-15'), 'Ice', 'Olivine'],
-    [d('09-16'), 'Rhodochrosite', 'Malachite'],
-    [d('09-17'), 'Sodalite', 'Quetzalcoatlite'],
-    [d('09-18'), 'Quartz', 'Kyanite'],
-    [d('09-19'), 'Corundum', 'Pyroxene'],
-    [d('09-20'), 'Tourmaline', 'Opal'],
-    [d('09-21'), 'Serpentine', 'Scheelite'],
+    { date: d('09-12'), minerals: ['Chalcanthite', 'Torbernite'] },
+    { date: d('09-13'), minerals: ['Saponite', 'Zircon'] },
+    { date: d('09-14'), minerals: ['Palygorskite', 'Kaolinite'] },
+    { date: d('09-15'), minerals: ['Ice', 'Olivine'] },
+    { date: d('09-16'), minerals: ['Rhodochrosite', 'Malachite'] },
+    { date: d('09-17'), minerals: ['Sodalite', 'Quetzalcoatlite'] },
+    { date: d('09-18'), minerals: ['Quartz', 'Kyanite'] },
+    { date: d('09-19'), minerals: ['Corundum', 'Pyroxene'] },
+    { date: d('09-20'), minerals: ['Tourmaline', 'Opal'] },
+    { date: d('09-21'), minerals: ['Serpentine', 'Scheelite'] },
 ];
 
 export default competitions;
+
+export function getCurrentCompetition(date: Date): Competition {
+    let foundComp = competitions[0];
+
+    for (const c of competitions) {
+        if (c.date < date) {
+            foundComp = c;
+        } else {
+            return foundComp;
+        }
+    }
+
+    return foundComp;
+}
