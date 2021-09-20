@@ -1,6 +1,7 @@
 export interface Competition {
     date: Date;
     minerals: [string, string];
+    hashtags?: [string, string];
 }
 
 // voting at 23:00 GMT (approx)
@@ -16,9 +17,12 @@ const competitions: Competition[] = [
     { date: d('09-16'), minerals: ['Rhodochrosite', 'Malachite'] },
     { date: d('09-17'), minerals: ['Sodalite', 'Quetzalcoatlite'] },
     { date: d('09-18'), minerals: ['Quartz', 'Kyanite'] },
-    { date: d('09-19'), minerals: ['Corundum', 'Pyroxene'] },
+    { date: d('09-19'), minerals: ['Corundum', 'Cinnabar'] },
     { date: d('09-20'), minerals: ['Tourmaline', 'Opal'] },
     { date: d('09-21'), minerals: ['Serpentine', 'Scheelite'] },
+    { date: d('09-22'), minerals: ['Fluorite', 'Torbernite'] },
+    { date: d('09-23'), minerals: ['Zircon', 'Ice'], hashtags: ['Zircon', 'IceMin'] },
+    { date: d('09-24'), minerals: ['Kaolinite', 'Malachite'] },
 ];
 
 export default competitions;

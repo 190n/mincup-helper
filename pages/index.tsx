@@ -1,23 +1,21 @@
 import type { NextPage } from 'next';
 
-import { getTweetsFromHashtag } from '../lib/twitter';
+import { getTweetsFromHashtag, Tweet } from '../lib/twitter';
+import TweetCard from '../components/TweetCard';
 
-const Home: NextPage<any> = (props) => (
+export interface HomeProps {
+    tweets: Tweet[];
+}
+
+const Home: NextPage<HomeProps> = (props) => (
     <>
         <h1 className="title is-1">MinCup Helper</h1>
-        {JSON.stringify(props)}
-        {/* {props.data.map((tweet, i) => (
-            <div className="card block" key={i}>
-                <div className="card-content">
-                    {tweet.text}
-                </div>
-            </div>
-        ))} */}
+        {props.tweets.map(t => <TweetCard tweet={t} key={t.id} />)}
     </>
 );
 
 export default Home;
 
 export async function getStaticProps() {
-    return { props: await getTweetsFromHashtag('Malachite') };
+    return { props: { tweets: await getTweetsFromHashtag('Corundum') } };
 }

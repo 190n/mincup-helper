@@ -1,13 +1,19 @@
-export async function getTweetsFromHashtag(hashtag: string, excludeHashtag?: string): Promise<{ data: any }> {
-    let query = `#${hashtag} -is:retweet`;
-    if (typeof excludeHashtag == 'string') {
-        query += ` -#${excludeHashtag}`;
-    }
+export interface Tweet {
+    text: string;
+    id: string;
+    username: string;
+    name: string;
+    date: string;
+}
+
+export async function getTweetsFromHashtag(hashtag: string): Promise<Tweet[]> {
+    const query = `#${hashtag} -is:retweet`;
 
     const res = await fetch(
         'https://api.twitter.com/2/tweets/search/recent'
             + `?query=${encodeURIComponent(query)}`
-            + '&expansions=author_id,attachments.media_keys',
+            + '&expansions=author_id'
+            + '&tweet.fields=entities,created_at',
         {
             headers: {
                 Authorization: `Bearer ${process.env.TWITTER_TOKEN}`,
@@ -15,7 +21,20 @@ export async function getTweetsFromHashtag(hashtag: string, excludeHashtag?: str
         },
     );
 
-    const json = await res.json();
+    const json = await res.json(), tweets: Tweet[] = [];
 
-    return json;
+    for (const t of json.data) {
+        const author = json.includes.users.find(u => u.id == t.author_id);
+        const tweet = {
+            text: t.text,
+            id: t.id,
+            username: author.username,
+            name: author.name,
+            date: t.created_at,
+        };
+
+        tweets.push(tweet);
+    }
+
+    return tweets;
 }
