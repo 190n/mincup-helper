@@ -8,7 +8,7 @@ export interface Tweet {
 }
 
 export async function getTweetsFromHashtag(hashtag: string): Promise<Tweet[]> {
-    const query = `#${hashtag} -is:retweet has:media`;
+    const query = `#${hashtag} -is:retweet`;
 
     const res = await fetch(
         'https://api.twitter.com/2/tweets/search/recent'

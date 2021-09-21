@@ -25,9 +25,11 @@ export default function TweetCard({ tweet }: TweetCardProps) {
             </div>
             {tweet.images && (
                 <div className="card-image">
-                    <figure className="image">
-                        <img src={tweet.images[0]} />
-                    </figure>
+                    {tweet.images.map((url, i) => (
+                        <figure className="image" key={i}>
+                            <img src={url} />
+                        </figure>
+                    ))}
                 </div>
             )}
         </div>

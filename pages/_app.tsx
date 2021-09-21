@@ -3,7 +3,7 @@ import type { AppProps } from 'next/app';
 
 function MyApp({ Component, pageProps }: AppProps) {
     return (
-        <main className="column is-8-desktop is-offset-2-desktop">
+        <main className="column is-10-desktop is-offset-1-desktop is-8-widescreen is-offset-2-widescreen">
             <Component {...pageProps} />
         </main>
     );
