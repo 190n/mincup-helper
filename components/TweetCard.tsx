@@ -23,6 +23,13 @@ export default function TweetCard({ tweet }: TweetCardProps) {
                     {new Date(tweet.date).toLocaleString()}
                 </ExternalLink>
             </div>
+            {tweet.images && (
+                <div className="card-image">
+                    <figure className="image">
+                        <img src={tweet.images[0]} />
+                    </figure>
+                </div>
+            )}
         </div>
     );
 }

@@ -17,5 +17,5 @@ const Home: NextPage<HomeProps> = (props) => (
 export default Home;
 
 export async function getStaticProps() {
-    return { props: { tweets: await getTweetsFromHashtag('Corundum') } };
+    return { props: { tweets: await getTweetsFromHashtag('Cinnabar') } };
 }
